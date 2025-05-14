@@ -1,8 +1,19 @@
 import React from 'react'
 
-const Products = () => {
+const Products = ({ allProducts }) => {
   return (
-    <div>Products</div>
+    <div>
+      {allProducts.map(p => {
+        <div className='product'>
+          <p>{p.name}</p>
+          <img src={"/images/" + p.name + ".png"} />
+          <div>
+            <span>{p.price}</span>
+            <b>{p.code}</b>
+          </div>
+        </div>
+      })}
+    </div>
   )
 }
 
