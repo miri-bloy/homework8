@@ -38,12 +38,14 @@ function App() {
   // משתנה סטייט המקבל את הסכום שהמשתמש הכניס
   const [price, setPrice]=useState(0);
 
+  // משתנה השומר את סכום הכסף שיש בארנק
+  const [sum, setSum] = useState(50);
   return (
     <div>
       <header>מכונת משקאות</header>
       <div><Hello /></div>
       <div><Keyboard setCurrentProduct={setCurrentProduct} allProducts={allProducts}/></div>
-      <div><Wallet/></div>
+      <div><Wallet sum={sum} setSum={setSum}/></div>
       <div><Money price={price} setPrice={setPrice}/></div>
       <div><Products allProducts={allProducts}/></div>
       <div><Selected_Product/></div>

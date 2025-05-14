@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 
-const Money = ({setPrice, price}) => {
+const Money = ({ setPrice, price }) => {
   // פונקציה המקבלת את הסכום של הכפתור הנלחץ
-  const setThePrice=(num)=>{
+  const setThePrice = (num) => {
     // הפונקציה מעדכנת את המחיר הסופי שהמשתמש הכניס
-    setPrice(price+parseInt(num));
+    setPrice(price + parseInt(num));
   }
 
   return (
     <div id='money'>
       <div>הסכום שהוכנס: <b>{price}</b></div>
-      <button onClick={()=>setThePrice(0.5)}></button>
-      <button onClick={()=>setThePrice(1)}></button>
-      <button onClick={()=>setThePrice(5)}></button>
-      <button onClick={()=>setThePrice(10)}></button>
+      <div id='buttons'>
+        <button onClick={() => setThePrice(0.5)}></button>
+        <button onClick={() => setThePrice(1)}></button>
+        <button onClick={() => setThePrice(5)}></button>
+        <button onClick={() => setThePrice(10)}></button>
+      </div>
     </div>
   )
 }
