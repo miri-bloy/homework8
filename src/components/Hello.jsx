@@ -2,7 +2,7 @@ import React from 'react'
 
 const Hello = () => {
   return (
-    <div>Hello</div>
+    <div>שלום,אנא הכנס קוד מוצר</div>
   )
 }
 
