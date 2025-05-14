@@ -10,7 +10,7 @@ import Selected_Product from './components/Selected_Product';
 import Surplus from './components/Surplus';
 
 function App() {
-
+// משתנה סטייט המקבל את מערך המוצרים
   const [allProducts, setAllProducts] = useState([
     {id: 1, name: "", price: 10, code: "1A"},
     {id: 2, name: "", price: 10, code: "1B"},
@@ -32,15 +32,19 @@ function App() {
     {id: 18, name: "", price: 10, code: "3F"}
   ])
 
+  // משתנה סטייט המקבל את המוצר הנוכחי
   const [currentProduct, setCurrentProduct]=useState({});
   
+  // משתנה סטייט המקבל את הסכום שהמשתמש הכניס
+  const [price, setPrice]=useState(0);
+
   return (
     <div>
       <header>מכונת משקאות</header>
       <div><Hello /></div>
       <div><Keyboard setCurrentProduct={setCurrentProduct} allProducts={allProducts}/></div>
       <div><Wallet/></div>
-      <div><Money/></div>
+      <div><Money price={price} setPrice={setPrice}/></div>
       <div><Products allProducts={allProducts}/></div>
       <div><Selected_Product/></div>
       <div><Surplus/></div>
