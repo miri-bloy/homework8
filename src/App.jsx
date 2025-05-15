@@ -12,24 +12,24 @@ import Surplus from './components/Surplus';
 function App() {
 // משתנה סטייט המקבל את מערך המוצרים
   const [allProducts, setAllProducts] = useState([
-    {id: 1, name: "", price: 10, code: "1A"},
-    {id: 2, name: "", price: 10, code: "1B"},
-    {id: 3, name: "", price: 10, code: "1C"},
-    {id: 4, name: "", price: 10, code: "1D"},
-    {id: 5, name: "", price: 10, code: "1E"},
-    {id: 6, name: "", price: 10, code: "1F"},
-    {id: 7, name: "", price: 10, code: "2A"},
-    {id: 8, name: "", price: 10, code: "2B"},
-    {id: 9, name: "", price: 10, code: "2C"},
-    {id: 10, name: "", price: 10, code: "2D"},
-    {id: 11, name: "", price: 10, code: "2E"},
-    {id: 12, name: "", price: 10, code: "2F"},
-    {id: 13, name: "", price: 10, code: "3A"},
-    {id: 14, name: "", price: 10, code: "3B"},
-    {id: 15, name: "", price: 10, code: "3C"},
-    {id: 16, name: "", price: 10, code: "3D"},
-    {id: 17, name: "", price: 10, code: "3E"},
-    {id: 18, name: "", price: 10, code: "3F"}
+    {id: 1, name: "x", price: 10, code: "1A"},
+    {id: 2, name: "x", price: 10, code: "1B"},
+    {id: 3, name: "x", price: 10, code: "1C"},
+    {id: 4, name: "x", price: 10, code: "1D"},
+    {id: 5, name: "x", price: 10, code: "1E"},
+    {id: 6, name: "x", price: 10, code: "1F"},
+    {id: 7, name: "x", price: 10, code: "2A"},
+    {id: 8, name: "x", price: 10, code: "2B"},
+    {id: 9, name: "x", price: 10, code: "2C"},
+    {id: 10, name: "x", price: 10, code: "2D"},
+    {id: 11, name: "x", price: 10, code: "2E"},
+    {id: 12, name: "x", price: 10, code: "2F"},
+    {id: 13, name: "x", price: 10, code: "3A"},
+    {id: 14, name: "x", price: 10, code: "3B"},
+    {id: 15, name: "x", price: 10, code: "3C"},
+    {id: 16, name: "x", price: 10, code: "3D"},
+    {id: 17, name: "x", price: 10, code: "3E"},
+    {id: 18, name: "x", price: 10, code: "3F"}
   ])
 
   // משתנה סטייט המקבל את המוצר הנוכחי
@@ -46,7 +46,7 @@ function App() {
       <div><Hello /></div>
       <div><Keyboard setCurrentProduct={setCurrentProduct} allProducts={allProducts}/></div>
       <div><Wallet sum={sum} setSum={setSum}/></div>
-      <div><Money price={price} setPrice={setPrice}/></div>
+      <div><Money price={price} setPrice={setPrice} sum={sum} setSum={setSum}/></div>
       <div><Products allProducts={allProducts}/></div>
       <div><Selected_Product/></div>
       <div><Surplus/></div>

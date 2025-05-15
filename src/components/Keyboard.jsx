@@ -3,36 +3,48 @@ import React, { useState } from 'react'
 const Keyboard = ({ setCurrentProduct, allProducts }) => {
   // משתנה סטייט של הקוד שהוקש
   const [currentCode, setCurrentCode] = useState('');
+  // הגדרת המשתנה שיקבל את המוצר המבוקש
+  const[product, setProduct] =useState(null);
+  const [message,setMessage]=useState("");
   // פונקציה המקבלת את הטקסט של הכפתור הנלחץ
   const setCode = (text) => {
-    // משתנה נמקבל את שרשור הקוד לאחר ההקלדה
+    // משתנה המקבל את שרשור הקוד לאחר ההקלדה
     const nextcode=currentCode+text;
     // הפונקציה מעדכנת את הקוד 
     setCurrentCode(nextcode);
-    // הגדרת המשתנה בחוץ, כדי שאוכל לבדוק את הערך שלו גם מחוץ לתנאי
-    let product="";
     // אם הקוד באורך 2 תווים
     if (nextcode.length === 2) {
       // חיפוש המוצר במערך-לפי הקוד שהוקש
-      product= allProducts.find(p => p.code === nextcode);
+      setProduct(allProducts.find(p => p.code === nextcode));
       // אם אכן נמצא מוצר מתאים
       if (product != null) {
         // עדכון משתנה הסטייט של המוצר הנוכחי הרצוי
         setCurrentProduct(product);
       }
+      else{
+        setMessage("לא נמצא אימוגי מתאים");
+      }
     }
     // אם הקוד גדול מ2 תווים
-    else if(nextcode>2){
-      // ריקון הקוד
-      setCurrentCode("");
+    else if(nextcode.length>2){
+      // עדכון הקוד-כך שישאר בו רק התו האחרון שהוקלד
+      setCurrentCode(text);
     }
     // הדפסת המוצר לבדיקה האם הכול עובד
     console.log(product);
   }
+
+  // פוקנציה המופעלת בלחיצה על כפתור מחיקה
+  const Delete = ()=>{
+    // ריקון המחרוזת
+    setCurrentCode("");
+    setMessage("");
+  }
   return (
     <div>
       <div>
-        <p>הקוד שהוקש הוא: </p><b>{currentCode}</b>
+        <p>קוד: <b>{currentCode}</b></p>
+        <p>אימוגי: <b>{product!=null? product.name : message}</b></p>
       </div>
       <div>
         <button onClick={(event) => setCode(event.target.innerText)}>1</button>
@@ -44,6 +56,7 @@ const Keyboard = ({ setCurrentProduct, allProducts }) => {
         <button onClick={(event) => setCode(event.target.innerText)}>D</button>
         <button onClick={(event) => setCode(event.target.innerText)}>E</button>
         <button onClick={(event) => setCode(event.target.innerText)}>F</button>
+        <button onClick={Delete}>מחק</button>
       </div>
     </div>
   )
