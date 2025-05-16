@@ -3,16 +3,16 @@ import React from 'react'
 const Products = ({ allProducts }) => {
   return (
     <div>
-      {allProducts.map(p => {
+      {allProducts.map(p =>
         <div className='product'>
           <p>{p.name}</p>
-          <img src={"/images/" + p.name + ".png"} />
+          <img src={"/images/" + p.id + ".png"} />
           <div>
-            <span>{p.price}</span>
-            <b>{p.code}</b>
+            <b>קוד: {p.code}</b>
+            <span>מחיר: {p.price}</span>
           </div>
         </div>
-      })}
+      )}
     </div>
   )
 }

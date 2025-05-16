@@ -49,7 +49,7 @@ function App() {
       <div><Money price={price} setPrice={setPrice} sum={sum} setSum={setSum}/></div>
       <div><Products allProducts={allProducts}/></div>
       <div><Selected_Product/></div>
-      <div><Surplus/></div>
+      <div><Surplus price={price} setPrice={setPrice} sum={sum} setSum={setSum} currentProduct={currentProduct}/></div>
     </div>
   );
 }
