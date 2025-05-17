@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 // הפונקציה מקבלת את הפונקציה שמשנה את המוצר הנבחר, ואת מערך המוצרים
-const Keyboard = ({ setCurrentProduct, allProducts }) => {
+const Keyboard = ({currentProduct, setCurrentProduct, allProducts }) => {
   // משתנה סטייט של הקוד שהוקש
   const [currentCode, setCurrentCode] = useState('');
-  // הגדרת המשתנה שיקבל את המוצר המבוקש
-  const[product, setProduct] =useState(null);
+  // משתנה המקבל תוכן הודעה מתאימה
   const [message,setMessage]=useState("");
   // פונקציה המקבלת את הטקסט של הכפתור הנלחץ
   const setCode = (text) => {
@@ -15,13 +14,14 @@ const Keyboard = ({ setCurrentProduct, allProducts }) => {
     // אם הקוד באורך 2 תווים
     if (nextcode.length === 2) {
       // חיפוש המוצר במערך-לפי הקוד שהוקש
-      setProduct(allProducts.find(p => p.code === nextcode));
+      const foundProduct = allProducts.find(p => p.code === nextcode);
       // אם אכן נמצא מוצר מתאים
-      if (product != null) {
+      if (foundProduct != null) {
         // עדכון משתנה הסטייט של המוצר הנוכחי הרצוי
-        setCurrentProduct(product);
+        setCurrentProduct(foundProduct);
       }
       else{
+        // עדכון ההודעה המתאימה
         setMessage("לא נמצא אימוגי מתאים");
       }
     }
@@ -30,8 +30,6 @@ const Keyboard = ({ setCurrentProduct, allProducts }) => {
       // עדכון הקוד-כך שישאר בו רק התו האחרון שהוקלד
       setCurrentCode(text);
     }
-    // הדפסת המוצר לבדיקה האם הכול עובד
-    console.log(product);
   }
 
   // פוקנציה המופעלת בלחיצה על כפתור מחיקה
@@ -44,7 +42,7 @@ const Keyboard = ({ setCurrentProduct, allProducts }) => {
     <div>
       <div>
         <p>קוד: <b>{currentCode}</b></p>
-        <p>אימוגי: <b>{product!=null? product.name : message}</b></p>
+        <p>מחיר: <b>{currentProduct!=null? currentProduct.price : message}</b></p>
       </div>
       <div>
         <button onClick={(event) => setCode(event.target.innerText)}>1</button>
