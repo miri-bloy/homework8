@@ -15,12 +15,13 @@ const Wallet = ({ sum, setSum }) => {
     }
   }
   return (
-    <div>
-      <div>
-        <p>הסכום בארנק: </p>
-        <b>{sum}</b>
+    <div id='wallet'>
+      <div id='message-wallet'>
+        <p>הסכום בארנק: 
+        <b>{sum.toFixed(2)}₪</b>
+        </p>
       </div>
-      <div>
+      <div id='change-wallet'>
         <input type="text" placeholder='שינוי הסכום' value={value}
           onChange={(event) => setValue(event.target.value)} />
         <button onClick={update}>עדכון</button>

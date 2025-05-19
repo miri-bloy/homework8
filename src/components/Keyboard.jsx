@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 // הפונקציה מקבלת את הפונקציה שמשנה את המוצר הנבחר, ואת מערך המוצרים
-const Keyboard = ({currentProduct, setCurrentProduct, allProducts }) => {
-  // משתנה סטייט של הקוד שהוקש
-  const [currentCode, setCurrentCode] = useState('');
+const Keyboard = ({currentCode, setCurrentCode,currentProduct, setCurrentProduct, allProducts }) => {
   // משתנה המקבל תוכן הודעה מתאימה
   const [message,setMessage]=useState("");
   // פונקציה המקבלת את הטקסט של הכפתור הנלחץ
@@ -39,23 +37,23 @@ const Keyboard = ({currentProduct, setCurrentProduct, allProducts }) => {
     setMessage("");
   }
   return (
-    <div>
-      <div>
+    <div id='keyboard'>
+      <div id='screen'>
         <p>קוד: <b>{currentCode}</b></p>
         <p>מחיר: <b>{currentProduct!=null? currentProduct.price : message}</b></p>
       </div>
-      <div>
-        <button onClick={(event) => setCode(event.target.innerText)}>1</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>2</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>3</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>A</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>B</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>C</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>D</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>E</button>
-        <button onClick={(event) => setCode(event.target.innerText)}>F</button>
-        <button onClick={Delete}>מחק</button>
+      <div id='buttons'>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>1</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>2</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>3</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>A</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>B</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>C</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>D</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>E</button>
+        <button className='button-code' onClick={(event) => setCode(event.target.innerText)}>F</button>
       </div>
+      <button id='delete' onClick={Delete}>מחק</button>
     </div>
   )
 }

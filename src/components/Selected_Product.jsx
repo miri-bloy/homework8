@@ -2,9 +2,9 @@ import React from 'react'
 
 const Selected_Product = ({productToPickup, setProductToPickup }) => {
   return (
-    <div>
+    <div id='Selected_Product'>
       {productToPickup!=null && 
-      <div>
+      <div id='productToPickup'>
         <img src={"/images/" + productToPickup.id + ".png"} />
         <p>בבקשה!</p>
         <button onClick={()=>setProductToPickup(null)}>איסוף מוצר</button>

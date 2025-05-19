@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 const Surplus = ({surplus}) => {
   return (
-    <div>
+    <div id='surplus'>
       <div>קבלת עודף</div>
-      <b>{surplus}₪</b>
+      <p>{surplus>0 && <b>surplus.toFixed(2)₪</b>}</p>
     </div>
   )
 }

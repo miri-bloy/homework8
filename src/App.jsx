@@ -10,72 +10,85 @@ import Selected_Product from './components/Selected_Product';
 import Surplus from './components/Surplus';
 
 function App() {
-// משתנה סטייט המקבל את מערך המוצרים
+  // משתנה סטייט המקבל את מערך המוצרים
   const [allProducts, setAllProducts] = useState([
-    {id: 1, price: 10, code: "1A"},
-    {id: 2, price: 10, code: "1B"},
-    {id: 3, price: 10, code: "1C"},
-    {id: 4, price: 10, code: "1D"},
-    {id: 5, price: 10, code: "1E"},
-    {id: 6, price: 10, code: "1F"},
-    {id: 7, price: 10, code: "2A"},
-    {id: 8, price: 10, code: "2B"},
-    {id: 9, price: 10, code: "2C"},
-    {id: 10, price: 10, code: "2D"},
-    {id: 11, price: 10, code: "2E"},
-    {id: 12, price: 10, code: "2F"},
-    {id: 13, price: 10, code: "3A"},
-    {id: 14, price: 10, code: "3B"},
-    {id: 15, price: 10, code: "3C"},
-    {id: 16, price: 10, code: "3D"},
-    {id: 17, price: 10, code: "3E"},
-    {id: 18, price: 10, code: "3F"}
+    { id: 1, price: 10, code: "1A" },
+    { id: 2, price: 10, code: "1B" },
+    { id: 3, price: 10, code: "1C" },
+    { id: 4, price: 10, code: "1D" },
+    { id: 5, price: 10, code: "1E" },
+    { id: 6, price: 10, code: "1F" },
+    { id: 7, price: 10, code: "2A" },
+    { id: 8, price: 10, code: "2B" },
+    { id: 9, price: 10, code: "2C" },
+    { id: 10, price: 10, code: "2D" },
+    { id: 11, price: 10, code: "2E" },
+    { id: 12, price: 10, code: "2F" },
+    { id: 13, price: 10, code: "3A" },
+    { id: 14, price: 10, code: "3B" },
+    { id: 15, price: 10, code: "3C" },
+    { id: 16, price: 10, code: "3D" },
+    { id: 17, price: 10, code: "3E" },
+    { id: 18, price: 10, code: "3F" }
   ])
-
+  // משתנה סטייט של הקוד שהוקש
+  const [currentCode, setCurrentCode] = useState('');
   // משתנה סטייט המקבל את המוצר הנוכחי
-  const [currentProduct, setCurrentProduct]=useState(null);
-  
+  const [currentProduct, setCurrentProduct] = useState(null);
   // משתנה סטייט שמקבל את המוצר שנבחר-לאחר הרכישה-לצורך הצגתו ללקוח
-  const [productToPickup, setProductToPickup]=useState(null);
-  
+  const [productToPickup, setProductToPickup] = useState(null);
   // משתנה סטייט המקבל את הסכום שהמשתמש הכניס
-  const [price, setPrice]=useState(0);
-
+  const [price, setPrice] = useState(0);
   // משתנה סטייט השומר את סכום הכסף שיש בארנק
   const [sum, setSum] = useState(50);
-
   // משתנה המקבל את סכום העודף המגיע ללקוח
-  const[surplus, setSurplus] =useState(0);
-  
-// הפונקציה מזומנת ע"י קומפוננטת התשלום-ובודקת האם ניתן להציג את המוצר/להחזיר עודף וכו
-  const handlePurchaseAttempt=()=>{
+  const [surplus, setSurplus] = useState(0);
+  // הפונקציה מזומנת ע"י קומפוננטת התשלום-ובודקת האם ניתן להציג את המוצר/להחזיר עודף וכו
+  const handlePurchaseAttempt = (newPrice) => {
     // בדיקה האם נבחר מוצר, והאם הסכום מספיק
-    if(currentProduct!=null && price>=currentProduct.price){
+    if (currentProduct != null && newPrice >= currentProduct.price) {
       // עדכון העודף המגיע ללקוח
-      setSurplus(price-currentProduct.price);
+      setSurplus(newPrice - currentProduct.price);
       // עדכון המחיר שיש ללקוח בארנק
-      setSum(sum-currentProduct.price);
+      setSum(sum - currentProduct.price);
       // עדכון המחיר שהלקוח שילם-לאחר שקיבל את העודף
       setPrice(0);
       // עדכון המוצר שמחכה לאיסוף-במוצר הנוכחי
       setProductToPickup(currentProduct);
+      // מעבר על המערך מוצרים
+      setAllProducts(allProducts.map(p => p.id === currentProduct.id
+        // אם האיבר הנוכחי הוא האיבר הנבחר-איפוס הערכים שיש לו במערך
+        ? { id: 0, price: 0, code: "xx" }
+        // אם לא-להתייחס אליו כרגיל
+        : p)
+      )
+      // איפוס הקוד
+      setCurrentCode('');
       // איפוס המוצר 
       setCurrentProduct(null);
     }
-    else if(currentProduct!=null && currentProduct.price-price>0){
+    else if (currentProduct != null && currentProduct.price - newPrice > 0) {
       alert("הסכום שהוכנס אינו מספיק");
     }
   }
   return (
-    <div>
+    <div id='app'>
       <header>מכונת משקאות</header>
-      <div><Hello /></div>
-      <div><Keyboard currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} allProducts={allProducts}/></div>
-      <div><Wallet sum={sum} setSum={setSum}/></div>
-      <div><Money price={price} setPrice={setPrice} handlePurchaseAttempt={handlePurchaseAttempt}/></div>
-      <div><Products allProducts={allProducts}/></div>
-      <div><Selected_Product productToPickup={productToPickup} setProductToPickup={setProductToPickup}/></div>
-      <div><Surplus surplus={surplus}/></div>
+      <div id='container'>
+        <aside>
+          <Hello />
+          <Keyboard currentCode={currentCode} setCurrentCode={setCurrentCode} currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} allProducts={allProducts} />
+          <Money currentProduct={currentProduct} price={price} setPrice={setPrice} handlePurchaseAttempt={handlePurchaseAttempt} />
+          <Surplus surplus={surplus} />
+        </aside>
+        <article>
+          <Products allProducts={allProducts} />
+          <Selected_Product productToPickup={productToPickup} setProductToPickup={setProductToPickup} />
+        </article>
+      </div>
+      <footer>
+        <Wallet sum={sum} setSum={setSum} />
+      </footer>
     </div>
   );
 }
